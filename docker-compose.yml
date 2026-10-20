@@ -1,0 +1,21 @@
+services:
+  etl:
+    build: .
+    image: pulseiq-etl:latest
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      RAW_DIR: /app/data/raw
+      CLEAN_DIR: /app/data/clean
+      REJECTED_DIR: /app/data/rejected
+      LOG_DIR: /app/logs
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+  test:
+    build: .
+    image: pulseiq-etl:latest
+    entrypoint: ["python", "-m", "pytest", "-q", "/app/tests"]
+    volumes:
+      - ./data:/app/data
