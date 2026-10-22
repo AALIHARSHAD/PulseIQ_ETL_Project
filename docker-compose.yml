@@ -19,3 +19,18 @@ services:
     entrypoint: ["python", "-m", "pytest", "-q", "/app/tests"]
     volumes:
       - ./data:/app/data
+
+  dashboard:
+    build: .
+    image: pulseiq-etl:latest
+    entrypoint:
+      - streamlit
+      - run
+      - /app/dashboards/app.py
+      - --server.address=0.0.0.0
+      - --server.port=8501
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data:ro
+      - ./dashboards:/app/dashboards:ro

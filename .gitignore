@@ -7,3 +7,11 @@ logs/*
 !data/clean/.gitkeep
 !data/rejected/.gitkeep
 !logs/.gitkeep
+
+# Generated warehouse database files
+data/*.duckdb
+data/*.duckdb.wal
+
+# Test and runtime artifacts
+.pytest_cache/
+*.log

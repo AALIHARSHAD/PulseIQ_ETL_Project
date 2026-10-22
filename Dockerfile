@@ -13,3 +13,5 @@ ENV PYTHONPATH=/app/src
 
 # Raw data, clean output, rejects and logs are mounted as volumes (see docker-compose.yml)
 ENTRYPOINT ["python", "-m", "pulseiq_etl"]
+
+COPY scripts/ ./scripts/
