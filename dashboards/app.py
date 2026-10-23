@@ -91,11 +91,15 @@ if not periods:
     st.warning("No valid reporting periods are available.")
     st.stop()
 
-start_period, end_period = st.sidebar.select_slider(
-    "Reporting period",
-    options=periods,
-    value=(periods[0], periods[-1]),
-)
+if len(periods) == 1:
+    start_period = end_period = periods[0]
+    st.sidebar.caption(f"Reporting period: {periods[0]}")
+else:
+    start_period, end_period = st.sidebar.select_slider(
+        "Reporting period",
+        options=periods,
+        value=(periods[0], periods[-1]),
+    )
 
 filtered = df[
     df["period_year_month"].between(start_period, end_period)
